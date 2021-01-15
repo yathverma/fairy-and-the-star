@@ -34,10 +34,9 @@ function setup() {
 	engine = Engine.create();
 	world = engine.world;
 
-	starBody = Bodies.circle(650 , 30 , 5 , {restitution:0.5, isStatic:true});
+	starBody = Bodies.circle(650 , 30 , 5 , {restitution:0.5, isStatic:true,frictionAir:0.3});
 	World.add(world, starBody);
-	star.x=starBody.position.x;
-	star.y=starBody.position.y;
+	
 	
 	Engine.run(engine);
 
@@ -47,6 +46,8 @@ function setup() {
 function draw() {
   background(bgImg);
 
+ star.x=starBody.position.x;
+ star.y=starBody.position.y;
 
   drawSprites();
 
