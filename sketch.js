@@ -19,7 +19,7 @@ function preload()
 function setup() {
 	createCanvas(800, 750);
 
-	 fairyVoice.play();
+	fairyVoice.play();
 
 	
 
@@ -44,16 +44,39 @@ function setup() {
 
 
 function draw() {
-  background(bgImg);
+	background(bgImg);
 
- star.x=starBody.position.x;
- star.y=starBody.position.y;
+	Engine.update(engine);
 
+ 	star.x=starBody.position.x;
+  	star.y=starBody.position.y;
+	
+	if (keyDown(RIGHT_ARROW)) {
+		fairy.velocityX = 5;
+	}
+	
+	if (keyDown(LEFT_ARROW)) {
+		fairy.velocityX = -5;
+	}
+	
+	if (keyWentUp(LEFT_ARROW) || keyWentUp(RIGHT_ARROW)){
+		fairy.velocityX=0;
+	}
+  
+	if (fairy.x===520){
+		Matter.Body.setStatic(starBody, false);
+		fairy.velocityX=0;
+	}
+
+	if (starBody.position.y > 470){
+		Matter.Body.setStatic(starBody, true);
+		fairyVoice.stop();
+	 }
   drawSprites();
 
 }
 
-function keyPressed() {
+/*function keyPressed() {
 	//write code here
 
 if(keyCode===LEFT_ARROW){
@@ -65,8 +88,10 @@ if(keyCode===RIGHT_ARROW){
 }
 
 if(keyCode===DOWN_ARROW){
-	star.velocityY=3;
+	Matter.Body.setStatic(starBody,false);
 }
 
 
-}
+
+
+}*/
